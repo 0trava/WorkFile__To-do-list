@@ -21,6 +21,12 @@
 // Для того щоб будь-який компонент у додатку міг використовувати стор, обертаємо 
 // Provider все дерево компонентів.
 
+// 3
+
+// Далі встановлюємо бібліотеку, яка дозволить ініціалізувати логіку Redux DevTools
+// та зв'язати її з розширенням в інструментах розробника.
+// $ npm install @redux-devtools/extension
+
 
 import ReactDOM from "react-dom/client";
 import { App } from "components/App";
