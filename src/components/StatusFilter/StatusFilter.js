@@ -1,15 +1,12 @@
 import { Button } from "components/Button/Button";
 import css from "./StatusFilter.module.css";
 // Додаємо
-import { useSelector } from "react-redux";
 import { statusFilters } from "../../redux/constants";
 
 // Імпортуємо хук
 import { useSelector, useDispatch } from "react-redux";
 // Імпортуємо генератор екшену
 import { setStatusFilter } from "../../redux/actions";
-// Імпортуємо об'єкт значень фільтра
-import { statusFilters } from "../../redux/constants";
 
 
 
