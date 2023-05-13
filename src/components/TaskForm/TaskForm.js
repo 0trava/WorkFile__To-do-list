@@ -4,7 +4,7 @@
 // Імпортуємо хук
 import { useDispatch } from "react-redux";
 // Імпортуємо генератор екшену
-import { addTask } from "../../redux/actions";
+import { addTask } from "../../redux/__actions";
 
 import { Button } from "components/Button/Button";
 import css from "./TaskForm.module.css";

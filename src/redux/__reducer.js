@@ -68,7 +68,7 @@ import {
   deleteTask,
   setStatusFilter,
   toggleCompleted,
-} from "./actions";
+} from "./__actions";
 import { statusFilters } from "./constants";
 
 const tasksInitialState = [
