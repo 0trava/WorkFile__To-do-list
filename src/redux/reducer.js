@@ -20,6 +20,7 @@ const initialState = {
 // Використовуємо initialState як значення стану за умовчанням
 export const rootReducer = (state = initialState, action) => {
   // Редюсер розрізняє екшени за значенням властивості type
+//   ------------------------------------------------------------------
   switch (action.type) {
     // Залежно від типу екшену виконуватиметься різна логіка
     case "tasks/addTask": {
@@ -36,6 +37,30 @@ export const rootReducer = (state = initialState, action) => {
           ],
         };
       }
+    //   ------------------------------------------------------------------
+    case "tasks/deleteTask":
+      return {
+        ...state,
+        tasks: state.tasks.filter(task => task.id !== action.payload),
+      };
+    //   ------------------------------------------------------------------
+    case "tasks/toggleCompleted":
+      return {
+        ...state,
+        tasks: state.tasks.map(task => {
+          if (task.id !== action.payload) {
+            return task;
+          }
+          return {
+            ...task,
+            completed: !task.completed,
+          };
+        }),
+      };
+
+
+
+
     default:
       // Кожен редюсер отримує всі екшени, відправлені в стор.
       // Якщо редюсер не повинен обробляти якийсь тип екшену,
