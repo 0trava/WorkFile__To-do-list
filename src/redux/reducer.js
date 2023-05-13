@@ -39,32 +39,34 @@ export const rootReducer = (state = initialState, action) => {
       }
     //   ------------------------------------------------------------------
     case "tasks/deleteTask":
-      return {
-        ...state,
-        tasks: state.tasks.filter(task => task.id !== action.payload),
-      };
+        return state.filter(task => task.id !== action.payload);
     //   ------------------------------------------------------------------
     case "tasks/toggleCompleted":
-      return {
-        ...state,
-        tasks: state.tasks.map(task => {
-          if (task.id !== action.payload) {
-            return task;
-          }
-          return {
-            ...task,
-            completed: !task.completed,
-          };
-        }),
+        return state.map(task => {
+            if (task.id !== action.payload) {
+              return task;
+            }
+            return { ...task, completed: !task.completed };
+          });
+          default:
+            return state;
+        }
       };
 
-
-
-
-    default:
-      // Кожен редюсер отримує всі екшени, відправлені в стор.
-      // Якщо редюсер не повинен обробляти якийсь тип екшену,
-      // необхідно повернути наявний стан без змін.
-      return state;
-  }
-};
+    //   ------------------------------------------------------------------
+    const filtersInitialState = {
+        status: statusFilters.all,
+      };
+      // Відповідає лише за оновлення властивості filters
+      // Тепер значенням параметра state буде об'єкт фільтрів
+      const filtersReducer = (state = filtersInitialState, action) => {
+        switch (action.type) {
+          case "filters/setStatusFilter":
+            return {
+              ...state,
+              status: action.payload,
+            };
+          default:
+            return state;
+        }
+      };
