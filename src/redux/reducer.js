@@ -5,38 +5,25 @@
 
 import { statusFilters } from "./constants";
 
-const initialState = {
-  tasks: [
+// Імпортуємо функцію композиції редюсерів
+import { combineReducers } from "redux";
+
+const tasksInitialState = [
     { id: 0, text: "Learn HTML and CSS", completed: true },
     { id: 1, text: "Get good at JavaScript", completed: true },
     { id: 2, text: "Master React", completed: false },
     { id: 3, text: "Discover Redux", completed: false },
     { id: 4, text: "Build amazing apps", completed: false },
-  ],
-  filters: {
-    status: statusFilters.all,
-  },
-};
+  ];
+
 // Використовуємо initialState як значення стану за умовчанням
-export const rootReducer = (state = initialState, action) => {
+const tasksReducer = (state = tasksInitialState, action) =>  {
   // Редюсер розрізняє екшени за значенням властивості type
 //   ------------------------------------------------------------------
   switch (action.type) {
     // Залежно від типу екшену виконуватиметься різна логіка
-    case "tasks/addTask": {
-        // Потрібно повернути новий об'єкт стану
-        return {
-          // в якому є всі дані існуючого стану
-          ...state,
-          // та новий масив задач
-          tasks: [
-            // в якому є всі існуючі завдання
-            ...state.tasks,
-            // та об'єкт нового завдання
-            action.payload,
-          ],
-        };
-      }
+    case "tasks/addTask":
+        return [...state, action.payload];
     //   ------------------------------------------------------------------
     case "tasks/deleteTask":
         return state.filter(task => task.id !== action.payload);
@@ -70,3 +57,9 @@ export const rootReducer = (state = initialState, action) => {
             return state;
         }
       };
+
+// Код редюсерів tasksReducer та filtersReducer
+export const rootReducer = combineReducers({
+    tasks: tasksReducer,
+    filters: filtersReducer,
+  });
