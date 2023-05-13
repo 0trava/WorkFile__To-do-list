@@ -4,16 +4,43 @@ import css from "./StatusFilter.module.css";
 import { useSelector } from "react-redux";
 import { statusFilters } from "../../redux/constants";
 
+// Імпортуємо хук
+import { useSelector, useDispatch } from "react-redux";
+// Імпортуємо генератор екшену
+import { setStatusFilter } from "../../redux/actions";
+// Імпортуємо об'єкт значень фільтра
+import { statusFilters } from "../../redux/constants";
+
+
+
+
 export const StatusFilter = () => {
+
+    // Отримуємо посилання на функцію відправки екшенів
+    const dispatch = useDispatch();
 
     // Отримуємо значення фільтра із стану Redux
     const filter = useSelector(state => state.filters.status);
 
+    // Викликаємо генератор екшену та передаємо значення фільтра
+    // Відправляємо результат - екшен зміни фільтра
+    const handleFilterChange = filter => dispatch(setStatusFilter(filter));
+
+
   return (
     <div className={css.wrapper}>
-      <Button selected={filter === statusFilters.all}>All</Button>
-      <Button selected={filter === statusFilters.active}>Active</Button>
-      <Button selected={filter === statusFilters.completed}>Completed</Button>
+      <Button 
+        onClick={() => handleFilterChange(statusFilters.all)} 
+        selected={filter === statusFilters.all}
+        >All</Button>
+      <Button
+        onClick={() => handleFilterChange(statusFilters.active)}
+        selected={filter === statusFilters.active}
+        >Active</Button>
+      <Button 
+        selected={filter === statusFilters.completed}
+        onClick={() => handleFilterChange(statusFilters.completed)}
+        >Completed</Button>
     </div>
   );
 };
