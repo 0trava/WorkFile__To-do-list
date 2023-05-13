@@ -1,5 +1,8 @@
 import { createStore } from "redux";
 import { devToolsEnhancer } from "@redux-devtools/extension";
+
+import { rootReducer } from "./reducer";
+
 // Початкове значення стану Redux для кореневого редюсера,
 // якщо не передати параметр preloadedState.
 const initialState = {
@@ -16,9 +19,9 @@ const initialState = {
 };
 // Поки що використовуємо редюсер який
 // тільки повертає отриманий стан
-const rootReducer = (state = initialState, action) => {
-  return state;
-};
+// const rootReducer = (state = initialState, action) => {
+//   return state;
+// };
 
 // Створюємо розширення стора, щоб додати інструменти розробника
 const enhancer = devToolsEnhancer();
